@@ -1,66 +1,18 @@
-## Foundry
+## Wei Formatter
+Simple library to format wei values to humanly readeable string values, great for test logs:
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
-
-Foundry consists of:
-
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+```Lisp
+Running 1 test for test/ToEthString.t.sol:TestToEth
+[PASS] testLogEth() (gas: 84509)
+Logs:
+  raw value: 3679528730497806738513236668
+  fmt value: 3679528730.49780 DAI
+  raw value: 22292124848623647
+  fmt value: 22292124848.6236470 USDC
+```
 
 ## Documentation
-
-https://book.getfoundry.sh/
 
 ## Usage
 
 ### Build
-
-```shell
-$ forge build
-```
-
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
