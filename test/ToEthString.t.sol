@@ -21,8 +21,8 @@ contract TestToEth is Test {
         uint256 usdcTotalSupply = USDC.totalSupply();
 
         console.log("raw value: %d", daiTotalSupply);
-        console.log("fmt value: %s", ToEthStringLib.toEthString(daiTotalSupply, DAI.decimals(), 5));
-        console.log("raw value: %s", ToEthStringLib.toEthString(usdcTotalSupply, USDC.decimals(), 7));
-        console.log("fmt value: %d", usdcTotalSupply);
+        console.log("fmt value: %s DAI", ToEthStringLib.toEthString(daiTotalSupply, DAI.decimals(), 5));
+        console.log("raw value: %d", usdcTotalSupply);
+        console.log("fmt value: %s USDC", ToEthStringLib.toEthString(usdcTotalSupply, USDC.decimals(), 7));
     }
 }
