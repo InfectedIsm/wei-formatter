@@ -1,16 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "forge-std/console.sol";
-
-contract MyContract {
-    function testLogEth() public {
-        console.log("value: %s", toEthString(123154651654 ether, 18, 5));
-        console.log("value: %s", toEthString(0.00465 ether, 18, 5));
-        console.log("value: %s", toEthString(152456784230158, 18, 5));
-        console.log("value: %s", toEthString(1_123_456.789 ether, 6, 5));
-    }
-
+library ToEthStringLib {
     function toEthString(uint256 valueInWei, uint256 tokenDecimals, uint256 decimalPrecision)
         public
         pure
@@ -27,7 +18,7 @@ contract MyContract {
         // Insert the decimal point
         string memory integralPart = substring(valueStr, 0, bytes(valueStr).length - tokenDecimals);
         string memory fractionalPart =
-            substring(valueStr, bytes(valueStr).length - tokenDecimals, bytes(valueStr).length - decimalPrecision);
+            substring(valueStr, bytes(valueStr).length - tokenDecimals, bytes(valueStr).length);
         fractionalPart = adjustFractionalPart(fractionalPart, decimalPrecision);
 
         // Print the value
@@ -52,6 +43,8 @@ contract MyContract {
         }
         return fractionalPart;
     }
+
+    function addSpacesToIntegral(string memory integralPart) public returns (string memory) {}
 
     function toString(uint256 value) internal pure returns (string memory) {
         // Convert uint to string
@@ -87,6 +80,6 @@ contract MyContract {
     function toStringWithDecimals(uint256 _number, uint8 decimals) internal pure returns (string memory) {
         uint256 integerToPrint = _number / (10 ** decimals);
         uint256 decimalsToPrint = _number - (_number / (10 ** decimals)) * (10 ** decimals);
-        return string.concat(toString2(integerToPrint), ".", toString2(decimalsToPrint));
+        return string.concat(toString(integerToPrint), ".", toString(decimalsToPrint));
     }
 }
