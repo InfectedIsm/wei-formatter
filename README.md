@@ -11,6 +11,11 @@ Logs:
   fmt value: 22292124848.6236470 USDC
 ```
 
+You can configure token decimals (`IERC20.decimals()`) and desired precision for the fractional part
+```solidity
+function toEthString(uint256 valueInWei, uint256 tokenDecimals, uint256 decimalPrecision)
+```
+
 ## Documentation
 
 ## Usage
