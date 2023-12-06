@@ -29,6 +29,33 @@ library ToEthStringLib {
         return string(abi.encodePacked(integerPart, ".", fractionalPart));
     }
 
+    function toEthString(uint256 valueInWei, uint256 tokenDecimals)
+        public
+        pure
+        returns (string memory)
+    {
+        // Convert the value to a string
+        string memory valueStr = toString(valueInWei);
+
+        //make the value at least 18 decimals long
+        while (bytes(valueStr).length < tokenDecimals) {
+            valueStr = string(abi.encodePacked("0", valueStr));
+        }
+
+        // Insert the decimal point
+        string memory integerPart = substring(valueStr, 0, bytes(valueStr).length - tokenDecimals);
+        string memory fractionalPart = substring(valueStr, bytes(valueStr).length - tokenDecimals, bytes(valueStr).length);
+
+        // Print the value
+        if (bytes(integerPart).length == 0) {
+            integerPart = "0";
+        }
+		integerPart = addCommaToInteger(integerPart);
+
+        return string(abi.encodePacked(integerPart, ".", fractionalPart));
+    }
+
+
     function adjustFractionalPart(string memory fractionalPart, uint256 decimalPrecision)
         internal
         pure
