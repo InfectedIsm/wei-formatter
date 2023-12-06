@@ -16,16 +16,17 @@ library ToEthStringLib {
         }
 
         // Insert the decimal point
-        string memory integralPart = substring(valueStr, 0, bytes(valueStr).length - tokenDecimals);
-        string memory fractionalPart =
-            substring(valueStr, bytes(valueStr).length - tokenDecimals, bytes(valueStr).length);
-        fractionalPart = adjustFractionalPart(fractionalPart, decimalPrecision);
+        string memory integerPart = substring(valueStr, 0, bytes(valueStr).length - tokenDecimals);
+        string memory fractionalPart = substring(valueStr, bytes(valueStr).length - tokenDecimals, bytes(valueStr).length);
 
         // Print the value
-        if (bytes(integralPart).length == 0) {
-            integralPart = "0";
+        if (bytes(integerPart).length == 0) {
+            integerPart = "0";
         }
-        return string(abi.encodePacked(integralPart, ".", fractionalPart));
+		integerPart = addCommaToInteger(integerPart);
+        fractionalPart = adjustFractionalPart(fractionalPart, decimalPrecision);
+
+        return string(abi.encodePacked(integerPart, ".", fractionalPart));
     }
 
     function adjustFractionalPart(string memory fractionalPart, uint256 decimalPrecision)
@@ -44,7 +45,24 @@ library ToEthStringLib {
         return fractionalPart;
     }
 
-    function addSpacesToIntegral(string memory integralPart) public returns (string memory) {}
+    function addCommaToInteger(string memory integerPart) public pure returns (string memory) {
+        uint256 digits = bytes(integerPart).length;
+        if (digits <= 3) {
+            return integerPart;
+        }
+        uint256 underscores = (digits - 1) / 3;
+        bytes memory buffer = new bytes(digits + underscores);
+        uint256 bufferIndex = 0;
+        for (uint256 i = 0; i < digits; i++) {
+            // Insert underscore before every 3rd digit from the right, except at the start
+            if (i != 0 && (digits - i) % 3 == 0) {
+                buffer[bufferIndex++] = ',';
+            }
+            buffer[bufferIndex++] = bytes(integerPart)[i];
+        }
+
+        return string(buffer);
+	}
 
     function toString(uint256 value) internal pure returns (string memory) {
         // Convert uint to string
