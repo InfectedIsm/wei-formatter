@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 library ToEthStringLib {
-    function toEthString(uint256 valueInWei, uint256 tokenDecimals, uint256 decimalPrecision)
+    function toEthString(uint256 valueInWei, uint256 tokenDecimals, uint256 precision)
         public
         pure
         returns (string memory)
@@ -24,7 +24,7 @@ library ToEthStringLib {
             integerPart = "0";
         }
 		integerPart = addCommaToInteger(integerPart);
-        fractionalPart = adjustFractionalPart(fractionalPart, decimalPrecision);
+        fractionalPart = adjustFractionalPart(fractionalPart, precision);
 
         return string(abi.encodePacked(integerPart, ".", fractionalPart));
     }
@@ -56,16 +56,16 @@ library ToEthStringLib {
     }
 
 
-    function adjustFractionalPart(string memory fractionalPart, uint256 decimalPrecision)
+    function adjustFractionalPart(string memory fractionalPart, uint256 precision)
         internal
         pure
         returns (string memory)
     {
         // Adjust the length of the fractional part based on the desired precision
-        if (bytes(fractionalPart).length > decimalPrecision) {
-            fractionalPart = substring(fractionalPart, 0, decimalPrecision);
+        if (bytes(fractionalPart).length > precision) {
+            fractionalPart = substring(fractionalPart, 0, precision);
         } else {
-            while (bytes(fractionalPart).length < decimalPrecision) {
+            while (bytes(fractionalPart).length < precision) {
                 fractionalPart = string(abi.encodePacked(fractionalPart, "0"));
             }
         }
