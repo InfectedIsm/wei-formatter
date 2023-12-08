@@ -6,10 +6,10 @@ import "../lib/forge-std/src/console.sol";
 
 import {IERC20} from "./interfaces/IERC20.sol";
 
-import "../src/lib/ToEthString.sol";
+import "../src/lib/WeiFormatterLib.sol";
 
 contract TestToEth is Test {
-    using ToEthStringLib for uint256;
+    using WeiFormatterLib for uint256;
 
     IERC20 DAI = IERC20(0x6B175474E89094C44Da98b954EedeAC495271d0F);
     IERC20 USDC = IERC20(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48);

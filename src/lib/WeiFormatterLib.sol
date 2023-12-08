@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-library ToEthStringLib {
+library WeiFormatterLib {
     function toTokenDecimalStr(uint256 valueInWei, uint256 tokenDecimals, uint256 precision)
         public
         pure
