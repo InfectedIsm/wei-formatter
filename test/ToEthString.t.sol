@@ -9,8 +9,7 @@ import {IERC20} from "./interfaces/IERC20.sol";
 import "../src/lib/ToEthString.sol";
 
 contract TestToEth is Test {
-
-	using ToEthStringLib for uint256;
+    using ToEthStringLib for uint256;
 
     IERC20 DAI = IERC20(0x6B175474E89094C44Da98b954EedeAC495271d0F);
     IERC20 USDC = IERC20(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48);
@@ -24,9 +23,29 @@ contract TestToEth is Test {
         uint256 usdcTotalSupply = USDC.totalSupply();
 
         console.log("raw value: %d", daiTotalSupply);
-        console.log("fmt value: %s DAI", daiTotalSupply.toEthString(DAI.decimals(), 5));
-        console.log("raw value: %d", usdcTotalSupply);
-        console.log("fmt value: %s USDC", usdcTotalSupply.toEthString(USDC.decimals()));
-        console.log("fmt value: %s USDC", usdcTotalSupply.toEthString(USDC.decimals(), 2));
+        console.log("--toTokenDecimalString--");
+        console.log("fmt value: %s DAI", daiTotalSupply.toTokenDecimalStr(DAI.decimals()));
+        console.log("fmt value: %s DAI", daiTotalSupply.toTokenDecimalStr(DAI.decimals(), 5));
+        console.log("--toScientificString--");
+        console.log("fmt value: %s DAI", daiTotalSupply.toScientificStr());
+        console.log("fmt value: %s DAI", daiTotalSupply.toScientificStr(5));
+
+        console.log("\nraw value: %d", usdcTotalSupply);
+        console.log("--toTokenDecimalString--");
+        console.log("fmt value: %s USDC", usdcTotalSupply.toTokenDecimalStr(USDC.decimals()));
+        console.log("fmt value: %s USDC", usdcTotalSupply.toTokenDecimalStr(USDC.decimals(), 2));
+        console.log("--toScientificString--");
+        console.log("fmt value: %s DAI", usdcTotalSupply.toScientificStr());
+        console.log("fmt value: %s DAI", usdcTotalSupply.toScientificStr(5));
     }
+
+	function testZeroValue() public view {
+		
+		uint256 zero = 0;
+
+        console.log("\nraw value: %d", zero);
+        console.log("fmt value: %s DAI", zero.toTokenDecimalStr(18));
+        console.log("fmt value: %s DAI", zero.toScientificStr());
+
+	}
 }
