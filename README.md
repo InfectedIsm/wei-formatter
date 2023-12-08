@@ -3,7 +3,7 @@
 Simple library to format wei values to humanly readeable string values, great for logs:
 
 ```text
-Running 1 test for test/ToEthString.t.sol:TestToEth
+Running 1 test for test/WeiFormatterLib.t.sol:testLogTokens
 [PASS] testLogTokens() (gas: 125433)
 Logs:
 
@@ -48,7 +48,7 @@ import "../lib/forge-std/src/console.sol"; //could be another one
 
 contract MyContract {	
 
-    using ToEthStringLib for uint256;
+    using WeiFormatterLib for uint256;
 	//...
 
 	function foo() public {
