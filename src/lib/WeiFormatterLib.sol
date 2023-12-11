@@ -7,60 +7,57 @@ library WeiFormatterLib {
         pure
         returns (string memory)
     {
-        string memory valueStr = toString(valueInWei);
+        string memory valueStr = _toString(valueInWei);
 
         while (bytes(valueStr).length < tokenDecimals) {
             valueStr = string(abi.encodePacked("0", valueStr));
         }
 
-        string memory integerPart = substring(valueStr, 0, bytes(valueStr).length - tokenDecimals);
-        string memory fractionalPart = substring(valueStr, bytes(valueStr).length - tokenDecimals, bytes(valueStr).length);
+        string memory integerPart = _substring(valueStr, 0, bytes(valueStr).length - tokenDecimals);
+        string memory fractionalPart =
+            _substring(valueStr, bytes(valueStr).length - tokenDecimals, bytes(valueStr).length);
 
         if (bytes(integerPart).length == 0) {
             integerPart = "0";
         }
 
-        integerPart = addCommaDelimiter(integerPart);
-        fractionalPart = applyPrecision(fractionalPart, precision);
+        integerPart = _addCommaDelimiter(integerPart);
+        fractionalPart = _applyPrecision(fractionalPart, precision);
 
         return string(abi.encodePacked(integerPart, ".", fractionalPart));
     }
 
-    function toTokenDecimalStr(uint256 valueInWei, uint256 tokenDecimals) public pure returns (string memory) {
+    function toTokenDecimalStr(uint256 valueInWei, uint256 tokenDecimals) external pure returns (string memory) {
         return toTokenDecimalStr(valueInWei, tokenDecimals, tokenDecimals);
     }
 
     function toScientificStr(uint256 valueInWei, uint256 precision) public pure returns (string memory) {
         if (valueInWei == 0) return "0 e0";
 
-        uint256 digits = digitsCount(valueInWei);
+        uint256 digits = _digitsCount(valueInWei);
 
         uint256 exponent = uint256(digits) - 1;
-        string memory baseStr = toString(valueInWei / (10 ** exponent));
+        string memory baseStr = _toString(valueInWei / (10 ** exponent));
 
         string memory fractionStr;
         if (precision > 0) {
             uint256 fractionalPart = (valueInWei % 10 ** exponent) * 10 ** precision / (10 ** exponent);
-            fractionStr = string(abi.encodePacked(".", toString(fractionalPart)));
+            fractionStr = string(abi.encodePacked(".", _toString(fractionalPart)));
         }
 
-        return string(abi.encodePacked(baseStr, fractionStr, " e", toString(uint256(exponent))));
+        return string(abi.encodePacked(baseStr, fractionStr, " e", _toString(uint256(exponent))));
     }
 
-    function toScientificStr(uint256 valueInWei) public pure returns (string memory) {
+    function toScientificStr(uint256 valueInWei) external pure returns (string memory) {
         if (valueInWei == 0) return "0 e0";
-		uint256 digits = digitsCount(valueInWei);
+        uint256 digits = _digitsCount(valueInWei);
 
         return toScientificStr(valueInWei, digits - 1);
     }
 
-    function applyPrecision(string memory fractionalPart, uint256 precision)
-        internal
-        pure
-        returns (string memory)
-    {
+    function _applyPrecision(string memory fractionalPart, uint256 precision) internal pure returns (string memory) {
         if (bytes(fractionalPart).length > precision) {
-            fractionalPart = substring(fractionalPart, 0, precision);
+            fractionalPart = _substring(fractionalPart, 0, precision);
         } else {
             while (bytes(fractionalPart).length < precision) {
                 fractionalPart = string(abi.encodePacked(fractionalPart, "0"));
@@ -69,12 +66,12 @@ library WeiFormatterLib {
         return fractionalPart;
     }
 
-    function toString(uint256 value) internal pure returns (string memory) {
+    function _toString(uint256 value) internal pure returns (string memory) {
         if (value == 0) {
             return "0";
         }
 
-        uint256 digits = digitsCount(value);
+        uint256 digits = _digitsCount(value);
 
         bytes memory buffer = new bytes(digits);
         while (value != 0) {
@@ -85,7 +82,7 @@ library WeiFormatterLib {
         return string(buffer);
     }
 
-    function digitsCount(uint256 value) internal pure returns (uint256) {
+    function _digitsCount(uint256 value) internal pure returns (uint256) {
         uint256 temp = value;
         uint256 digits;
         while (temp != 0) {
@@ -95,7 +92,7 @@ library WeiFormatterLib {
         return digits;
     }
 
-    function substring(string memory str, uint256 startIndex, uint256 endIndex) internal pure returns (string memory) {
+    function _substring(string memory str, uint256 startIndex, uint256 endIndex) internal pure returns (string memory) {
         bytes memory strBytes = bytes(str);
         bytes memory result = new bytes(endIndex - startIndex);
         for (uint256 i = startIndex; i < endIndex; i++) {
@@ -104,7 +101,7 @@ library WeiFormatterLib {
         return string(result);
     }
 
-    function addCommaDelimiter(string memory integerPart) public pure returns (string memory) {
+    function _addCommaDelimiter(string memory integerPart) internal pure returns (string memory) {
         uint256 digits = bytes(integerPart).length;
         if (digits <= 3) {
             return integerPart;
@@ -123,9 +120,9 @@ library WeiFormatterLib {
         return string(buffer);
     }
 
-    function toStringWithDecimals(uint256 _number, uint8 decimals) internal pure returns (string memory) {
+    function _toStringWithDecimals(uint256 _number, uint8 decimals) internal pure returns (string memory) {
         uint256 integerToPrint = _number / (10 ** decimals);
         uint256 decimalsToPrint = _number - (_number / (10 ** decimals)) * (10 ** decimals);
-        return string.concat(toString(integerToPrint), ".", toString(decimalsToPrint));
+        return string.concat(_toString(integerToPrint), ".", _toString(decimalsToPrint));
     }
 }

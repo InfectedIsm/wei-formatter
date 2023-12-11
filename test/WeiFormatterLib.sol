@@ -39,13 +39,11 @@ contract TestToEth is Test {
         console.log("fmt value: %s DAI", usdcTotalSupply.toScientificStr(5));
     }
 
-	function testZeroValue() public view {
-		
-		uint256 zero = 0;
+    function testZeroValue() public view {
+        uint256 zero = 0;
 
         console.log("\nraw value: %d", zero);
         console.log("fmt value: %s DAI", zero.toTokenDecimalStr(18));
         console.log("fmt value: %s DAI", zero.toScientificStr());
-
-	}
+    }
 }
