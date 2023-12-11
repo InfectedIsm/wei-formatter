@@ -14,8 +14,7 @@ library WeiFormatterLib {
         }
 
         string memory integerPart = _substring(valueStr, 0, bytes(valueStr).length - tokenDecimals);
-        string memory fractionalPart =
-            _substring(valueStr, bytes(valueStr).length - tokenDecimals, bytes(valueStr).length);
+        string memory fractionalPart = _substring(valueStr, bytes(valueStr).length - tokenDecimals, bytes(valueStr).length);
 
         if (bytes(integerPart).length == 0) {
             integerPart = "0";
@@ -45,7 +44,7 @@ library WeiFormatterLib {
             fractionStr = string(abi.encodePacked(".", _toString(fractionalPart)));
         }
 
-        return string(abi.encodePacked(baseStr, fractionStr, " e", _toString(uint256(exponent))));
+        return string(abi.encodePacked(baseStr, fractionStr, "_e", _toString(uint256(exponent))));
     }
 
     function toScientificStr(uint256 valueInWei) external pure returns (string memory) {
