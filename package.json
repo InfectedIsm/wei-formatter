@@ -1,7 +1,7 @@
 {
   "name": "weiformatterlib",
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Simple library to format wei values to humanly readeable string values, great for logs.",
   "files": [
     "src/**/*.sol"
