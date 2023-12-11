@@ -6,7 +6,7 @@ import "../lib/forge-std/src/console.sol";
 
 import {IERC20} from "./interfaces/IERC20.sol";
 
-import "../src/lib/WeiFormatterLib.sol";
+import "../src/WeiFormatterLib.sol";
 
 contract TestToEth is Test {
     using WeiFormatterLib for uint256;

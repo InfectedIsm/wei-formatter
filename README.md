@@ -12,16 +12,16 @@ Logs:
   fmt value: 3,676,833,871.223741709049641512 DAI  // precision = none
   fmt value: 3,676,833,871.22374 DAI  // precision = 5
   --toScientificStr--
-  fmt value: 3.676833871223741709049641512 e27 DAI  // precision = none
-  fmt value: 3.67683 e27 DAI  // precision = 5
+  fmt value: 3.676833871223741709049641512_e27 DAI  // precision = none
+  fmt value: 3.67683_e27 DAI  // precision = 5
 
   raw value: 22297844161394365 //USDC 6 decimals
   --toTokenDecimalStr--
   fmt value: 22,297,844,161.394365 USDC  // precision = none
   fmt value: 22,297,844,161.39 USDC  // precision = 2
   --toScientificStr--
-  fmt value: 2.2297844161394365 e16 DAI  // precision = none
-  fmt value: 2.22978 e16 DAI  // precision = 5
+  fmt value: 2.2297844161394365_e16 DAI  // precision = none
+  fmt value: 2.22978_e16 DAI  // precision = 5
 ```
 
 ## Documentation

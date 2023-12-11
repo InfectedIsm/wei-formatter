@@ -31,7 +31,7 @@ library WeiFormatterLib {
     }
 
     function toScientificStr(uint256 valueInWei, uint256 precision) public pure returns (string memory) {
-        if (valueInWei == 0) return "0 e0";
+        if (valueInWei == 0) return "0_e0";
 
         uint256 digits = _digitsCount(valueInWei);
 
