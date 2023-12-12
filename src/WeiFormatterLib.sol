@@ -14,7 +14,8 @@ library WeiFormatterLib {
         }
 
         string memory integerPart = _substring(valueStr, 0, bytes(valueStr).length - tokenDecimals);
-        string memory fractionalPart = _substring(valueStr, bytes(valueStr).length - tokenDecimals, bytes(valueStr).length);
+        string memory fractionalPart =
+            _substring(valueStr, bytes(valueStr).length - tokenDecimals, bytes(valueStr).length);
 
         if (bytes(integerPart).length == 0) {
             integerPart = "0";
@@ -54,6 +55,11 @@ library WeiFormatterLib {
         return toScientificStr(valueInWei, digits - 1);
     }
 
+    function addCommaDelimiter(uint256 value) external pure returns (string memory) {
+        string memory integerPart = _toString(value);
+        return _addCommaDelimiter(integerPart);
+    }
+
     function _applyPrecision(string memory fractionalPart, uint256 precision) internal pure returns (string memory) {
         if (bytes(fractionalPart).length > precision) {
             fractionalPart = _substring(fractionalPart, 0, precision);
@@ -91,7 +97,11 @@ library WeiFormatterLib {
         return digits;
     }
 
-    function _substring(string memory str, uint256 startIndex, uint256 endIndex) internal pure returns (string memory) {
+    function _substring(string memory str, uint256 startIndex, uint256 endIndex)
+        internal
+        pure
+        returns (string memory)
+    {
         bytes memory strBytes = bytes(str);
         bytes memory result = new bytes(endIndex - startIndex);
         for (uint256 i = startIndex; i < endIndex; i++) {

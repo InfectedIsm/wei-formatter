@@ -7,21 +7,27 @@ Running 1 test for test/WeiFormatterLib.t.sol:testLogTokens
 [PASS] testLogTokens() (gas: 125433)
 Logs:
 
-  raw value: 3676833871223741709049641512 //DAI 18 decimals
-  --toTokenDecimalStr--
-  fmt value: 3,676,833,871.223741709049641512 DAI  // precision = none
-  fmt value: 3,676,833,871.22374 DAI  // precision = 5
-  --toScientificStr--
-  fmt value: 3.676833871223741709049641512_e27 DAI  // precision = none
-  fmt value: 3.67683_e27 DAI  // precision = 5
+	raw value: 3664561361098409999959676821	//DAI 18 decimals
+	--toTokenDecimalString--
+	3,664,561,361.098409999959676821 DAI 	// precision = none
+	3,664,561,361.09840 DAI  	// precision = 5
+	--toScientificString--
+	3.664561361098409999959676821_e27 DAI  // precision = none
+	3.66456_e27 DAI  // precision = 5
+	--addCommaDelimiter--
+	3,664,561,361,098,409,999,959,676,821 DAI
 
-  raw value: 22297844161394365 //USDC 6 decimals
-  --toTokenDecimalStr--
-  fmt value: 22,297,844,161.394365 USDC  // precision = none
-  fmt value: 22,297,844,161.39 USDC  // precision = 2
-  --toScientificStr--
-  fmt value: 2.2297844161394365_e16 DAI  // precision = none
-  fmt value: 2.22978_e16 DAI  // precision = 5
+	raw value: 22036807916576220
+	--toTokenDecimalString--
+	22,036,807,916.576220 USDC  // precision = none
+	22,036,807,916.57 USDC  // precision = 2
+	--toScientificString--
+	2.2036807916576220_e16 USDC  // precision = none
+	2.20368_e16 USDC  // precision = 5
+	-- addCommaDelimiter --
+	22,036,807,916,576,220 USDC
+
+
 ```
 
 ## Documentation

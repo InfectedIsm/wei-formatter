@@ -22,21 +22,25 @@ contract TestToEth is Test {
         uint256 daiTotalSupply = DAI.totalSupply();
         uint256 usdcTotalSupply = USDC.totalSupply();
 
-        console.log("raw value: %d", daiTotalSupply);
+        console.log("\nraw value: %d", daiTotalSupply);
         console.log("--toTokenDecimalString--");
         console.log("fmt value: %s DAI", daiTotalSupply.toTokenDecimalStr(DAI.decimals()));
         console.log("fmt value: %s DAI", daiTotalSupply.toTokenDecimalStr(DAI.decimals(), 5));
         console.log("--toScientificString--");
         console.log("fmt value: %s DAI", daiTotalSupply.toScientificStr());
         console.log("fmt value: %s DAI", daiTotalSupply.toScientificStr(5));
+        console.log("--addCommaDelimiter--");
+        console.log("fmt value: %s DAI", daiTotalSupply.addCommaDelimiter());
 
         console.log("\nraw value: %d", usdcTotalSupply);
         console.log("--toTokenDecimalString--");
         console.log("fmt value: %s USDC", usdcTotalSupply.toTokenDecimalStr(USDC.decimals()));
         console.log("fmt value: %s USDC", usdcTotalSupply.toTokenDecimalStr(USDC.decimals(), 2));
         console.log("--toScientificString--");
-        console.log("fmt value: %s DAI", usdcTotalSupply.toScientificStr());
-        console.log("fmt value: %s DAI", usdcTotalSupply.toScientificStr(5));
+        console.log("fmt value: %s USDC", usdcTotalSupply.toScientificStr());
+        console.log("fmt value: %s USDC", usdcTotalSupply.toScientificStr(5));
+        console.log("--addCommaDelimiter--");
+        console.log("fmt value: %s USDC", usdcTotalSupply.addCommaDelimiter());
     }
 
     function testZeroValue() public view {
