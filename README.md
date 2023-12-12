@@ -46,6 +46,12 @@ function toScientificStr(uint256 valueInWei, uint256 precision) public pure retu
 function toScientificStr(uint256 valueInWei) public pure returns (string memory)
 ```
 
+#### addCommaDelimiter
+
+```solidity
+function addCommaDelimiter(uint256 value) external pure returns (string memory)
+```
+
 ## Usage
 
 ```solidity
@@ -64,6 +70,7 @@ contract MyContract {
 
 		console.log(value.toTokenDecimalStr(value, token.decimals(), precision));
 		console.log(value.toScientificStr(value, precision));
+		console.log(value.addCommaDelimiter());
 	}
 }
 

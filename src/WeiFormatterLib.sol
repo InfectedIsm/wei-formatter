@@ -119,7 +119,6 @@ library WeiFormatterLib {
         bytes memory buffer = new bytes(digits + underscores);
         uint256 bufferIndex = 0;
         for (uint256 i = 0; i < digits; i++) {
-            // Insert comma before every 3rd digit from the right, except at the start
             if (i != 0 && (digits - i) % 3 == 0) {
                 buffer[bufferIndex++] = ",";
             }
