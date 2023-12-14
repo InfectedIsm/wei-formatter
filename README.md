@@ -3,20 +3,36 @@
 Simple library to format wei values to humanly readeable string values, great for logs:
 
 ```text
-Running 1 test for test/WeiFormatterLib.t.sol:testLogTokens
-[PASS] testLogTokens() (gas: 125433)
-Logs:
 
-	>>raw value: 3664561361098409999959676821	//DAI 18 decimals
-	>>
-	------toTokenDecimalStr--------
-	3,664,561,361.098409999959676821 DAI 	// precision = none
-	3,664,561,361.09840 DAI  	// precision = 5
-	--------toScientificStr--------
-	3.664561361098409999959676821_e27 DAI  // precision = none
-	3.66456_e27 DAI  // precision = 5
-	-------addCommaDelimiter--------
-	3,664,561,361,098,409,999,959,676,821 DAI
+raw value (DAI): 3647185179987473289582102320
+------------------------------------------------
+  --toTokenDecimalString--
+  3,647,185,179.987473289582102320 DAI
+  3,647,185,179.98747 DAI
+
+--toScientificString--
+  3.647185179987473289582102320_e27 DAI
+  3.64718_e27 DAI
+
+--Others--
+  3,647,185,179,987,473,289,582,102,320 DAI
+  3,647,185,179,987,473,289,582,102,320 (28) DAI
+  3647185179987473289582102320 (28) DAI
+
+raw value (USDC): 22172038791635991
+------------------------------------------------
+  --toTokenDecimalString--
+  22,172,038,791.635991 USDC
+  22,172,038,791.63 USDC
+
+--toScientificString--
+  2.2172038791635991_e16 USDC
+  2.21720_e16 USDC
+
+--Others--
+  22,172,038,791,635,991 USDC
+  22,172,038,791,635,991 (17) USDC
+  22172038791635991 (17) USDC
 
 ```
 

@@ -22,7 +22,8 @@ contract TestToEth is Test {
         uint256 daiTotalSupply = DAI.totalSupply();
         uint256 usdcTotalSupply = USDC.totalSupply();
 
-        console.log("\nraw value: %d", daiTotalSupply);
+        console.log("\nraw value (DAI): %d", daiTotalSupply);
+		console.log("------------------------------------------------");
         console.log("--toTokenDecimalString--");
         console.log("%s DAI", daiTotalSupply.toTokenDecimalStr(DAI.decimals()));
         console.log("%s DAI", daiTotalSupply.toTokenDecimalStr(DAI.decimals(), 5));
@@ -34,7 +35,8 @@ contract TestToEth is Test {
         console.log("%s DAI", daiTotalSupply.addDelimiterAndCount());
         console.log("%s DAI", daiTotalSupply.addCount());
 
-        console.log("\nraw value: %d", usdcTotalSupply);
+        console.log("\nraw value (USDC): %d", usdcTotalSupply);
+		console.log("------------------------------------------------");
         console.log("--toTokenDecimalString--");
         console.log("%s USDC", usdcTotalSupply.toTokenDecimalStr(USDC.decimals()));
         console.log("%s USDC", usdcTotalSupply.toTokenDecimalStr(USDC.decimals(), 2));
