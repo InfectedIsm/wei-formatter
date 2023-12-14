@@ -141,10 +141,4 @@ library WeiFormatterLib {
 
         return string(buffer);
     }
-
-    function _toStringWithDecimals(uint256 _number, uint8 decimals) internal pure returns (string memory) {
-        uint256 integerToPrint = _number / (10 ** decimals);
-        uint256 decimalsToPrint = _number - (_number / (10 ** decimals)) * (10 ** decimals);
-        return string.concat(_toString(integerToPrint), ".", _toString(decimalsToPrint));
-    }
 }
