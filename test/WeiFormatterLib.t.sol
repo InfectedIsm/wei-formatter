@@ -24,24 +24,28 @@ contract TestToEth is Test {
 
         console.log("\nraw value: %d", daiTotalSupply);
         console.log("--toTokenDecimalString--");
-        console.log("fmt value: %s DAI", daiTotalSupply.toTokenDecimalStr(DAI.decimals()));
-        console.log("fmt value: %s DAI", daiTotalSupply.toTokenDecimalStr(DAI.decimals(), 5));
-        console.log("--toScientificString--");
-        console.log("fmt value: %s DAI", daiTotalSupply.toScientificStr());
-        console.log("fmt value: %s DAI", daiTotalSupply.toScientificStr(5));
-        console.log("--addCommaDelimiter--");
-        console.log("fmt value: %s DAI", daiTotalSupply.addCommaDelimiter());
+        console.log("%s DAI", daiTotalSupply.toTokenDecimalStr(DAI.decimals()));
+        console.log("%s DAI", daiTotalSupply.toTokenDecimalStr(DAI.decimals(), 5));
+        console.log("\n--toScientificString--");
+        console.log("%s DAI", daiTotalSupply.toScientificStr());
+        console.log("%s DAI", daiTotalSupply.toScientificStr(5));
+        console.log("\n--Others--");
+        console.log("%s DAI", daiTotalSupply.addDelimiter());
+        console.log("%s DAI", daiTotalSupply.addDelimiterAndCount());
+        console.log("%s DAI", daiTotalSupply.addCount());
 
         console.log("\nraw value: %d", usdcTotalSupply);
         console.log("--toTokenDecimalString--");
-        console.log("fmt value: %s USDC", usdcTotalSupply.toTokenDecimalStr(USDC.decimals()));
-        console.log("fmt value: %s USDC", usdcTotalSupply.toTokenDecimalStr(USDC.decimals(), 2));
-        console.log("--toScientificString--");
-        console.log("fmt value: %s USDC", usdcTotalSupply.toScientificStr());
-        console.log("fmt value: %s USDC", usdcTotalSupply.toScientificStr(5));
-        console.log("--addCommaDelimiter--");
-        console.log("fmt value: %s USDC", usdcTotalSupply.addCommaDelimiter());
-    }
+        console.log("%s USDC", usdcTotalSupply.toTokenDecimalStr(USDC.decimals()));
+        console.log("%s USDC", usdcTotalSupply.toTokenDecimalStr(USDC.decimals(), 2));
+        console.log("\n--toScientificString--");
+        console.log("%s USDC", usdcTotalSupply.toScientificStr());
+        console.log("%s USDC", usdcTotalSupply.toScientificStr(5));
+        console.log("\n--Others--");
+        console.log("%s USDC", usdcTotalSupply.addDelimiter());
+        console.log("%s USDC", usdcTotalSupply.addDelimiterAndCount());
+        console.log("%s USDC", usdcTotalSupply.addCount());    
+	}
 
     function testZeroValue() public view {
         uint256 zero = 0;

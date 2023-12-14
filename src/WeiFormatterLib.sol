@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 library WeiFormatterLib {
+
     function toTokenDecimalStr(uint256 valueInWei, uint256 tokenDecimals, uint256 precision)
         public
         pure
@@ -21,7 +22,7 @@ library WeiFormatterLib {
             integerPart = "0";
         }
 
-        integerPart = _addCommaDelimiter(integerPart);
+        integerPart = _addDelimiter(integerPart);
         fractionalPart = _applyPrecision(fractionalPart, precision);
 
         return string(abi.encodePacked(integerPart, ".", fractionalPart));
@@ -55,9 +56,22 @@ library WeiFormatterLib {
         return toScientificStr(valueInWei, digits - 1);
     }
 
-    function addCommaDelimiter(uint256 value) external pure returns (string memory) {
+    function addCount(uint256 value) external pure returns (string memory) {
+		uint digits = _digitsCount(value);
         string memory integerPart = _toString(value);
-        return _addCommaDelimiter(integerPart);
+        return string(abi.encodePacked(integerPart, " (", _toString(uint256(digits)), ")"));
+    }
+
+    function addDelimiter(uint256 value) external pure returns (string memory) {
+        string memory integerPart = _toString(value);
+        return _addDelimiter(integerPart);
+    }
+
+    function addDelimiterAndCount(uint256 value) external pure returns (string memory) {
+		uint digits = _digitsCount(value);
+        string memory integerPart = _toString(value);
+		integerPart = _addDelimiter(integerPart);
+        return string(abi.encodePacked(integerPart, " (", _toString(uint256(digits)), ")"));
     }
 
     function _applyPrecision(string memory fractionalPart, uint256 precision) internal pure returns (string memory) {
@@ -110,7 +124,7 @@ library WeiFormatterLib {
         return string(result);
     }
 
-    function _addCommaDelimiter(string memory integerPart) internal pure returns (string memory) {
+    function _addDelimiter(string memory integerPart) internal pure returns (string memory) {
         uint256 digits = bytes(integerPart).length;
         if (digits <= 3) {
             return integerPart;
